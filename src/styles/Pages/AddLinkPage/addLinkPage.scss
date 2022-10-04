@@ -1,0 +1,20 @@
+@use "../../globals/_variables" as *;
+
+.add-link-page {
+    .header{
+        display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem;
+    }
+  .form-container {
+    display: flex;
+    justify-content: center;
+   
+  }
+}
+
+
+
+
+

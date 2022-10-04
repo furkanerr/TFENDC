@@ -1,0 +1,17 @@
+@use '../../globals/_variables' as *;
+
+.landing-page-container{
+    .search-section{
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+    }
+    .footer-section{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      
+    }
+}

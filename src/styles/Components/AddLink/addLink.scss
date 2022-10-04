@@ -1,0 +1,51 @@
+
+@use "../../globals/_variables" as *;
+form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    .formInput {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      margin-bottom: 2rem;
+      .error-message{
+        display: none;
+    }
+  
+      input {
+        background: #ffffff;
+        border: 1.5px solid $color-input-default-border;
+        border-radius: 12px;
+        width: 100%;
+        height: 46px;
+        &:invalid[focused=true]{
+            border: 1.5px solid $color-input-error-border;
+        }
+        &:invalid[focused=true]~ span{
+            color:  $color-input-error-border;
+            display: block;
+        }
+          &:invalid[focused=true]~ label{
+              color: $color-input-error-border;
+          }
+
+        &::placeholder {
+          padding-left: 1rem;
+          color: $color-input-default-placeholder;
+          font-weight: 700;
+font-size: 18px;
+line-height: 21px;
+        }
+      }
+      label{
+          font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 21px;
+color: $color-input-default-label;
+margin-top: 5px;
+margin-bottom: 1rem;
+      }
+    }
+  }

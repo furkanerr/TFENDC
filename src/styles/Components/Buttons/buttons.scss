@@ -1,0 +1,46 @@
+@use '../../globals/_variables' as *;
+
+  .add-button-container{
+    display: flex;
+    justify-content: end;
+  }
+.add-pagelink-button{
+    margin: 1rem 1rem 1rem 0;
+    padding: 1rem 2.5rem;
+    background-color: $color-add-button;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    align-self: end;
+    &:hover{
+        background-color: $color-add-button-hover;
+    }
+    
+}
+.add-pagelink-button-disabled{
+    background-color: $color-add-button-disabled;
+    cursor: not-allowed;
+    margin: 1rem 1rem 1rem 0;
+padding: 1rem 2.5rem;
+align-self: end;
+color: #ffffff;
+border: none;
+border-radius: 0.5rem;
+}
+
+
+.search-button-container{
+.search-pagelink-button{
+    margin: 1rem 1rem 1rem 0;
+    padding: 1rem 2rem;
+    background-color: $color-add-button;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5rem;
+    &:hover{
+        background-color: $color-add-button-hover;
+    }
+}
+
+}
