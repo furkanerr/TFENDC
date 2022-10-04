@@ -1,108 +1,214 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import appData from '../data/data.js';
+import appData from "../data/data.js";
 
 export const DataContext = createContext();
 
+const DataProvider = ({ children }) => {
+  const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [offSet, setOffSet] = useState(0);
+  const [itemQuantity, setItemQuantity] = useState(searchResults.length);
+  const [paginationData, setPaginationData] = useState([]);
+  const [orderType, setOrderType] = useState("");
+  const handleNextIcon = () => {
+    // handle next icon click
 
- const DataProvider = ({ children }) => {
-    const [data, setData] = useState([]);
+    setCurrentPage(currentPage + 1);
+    setOffSet(offSet + 5);
+  };
+  const handlePreviousIcon = () => {
+    // handle previous icon click
+    setCurrentPage(currentPage - 1);
+    setOffSet(offSet - 5);
+  };
+  const handleNext = (Event) => {
+    // handle next click
+    Event.preventDefault(); // prevent default behaviour
+    let targetPage = Event.target.innerHTML; // get target page number
+    setCurrentPage(parseInt(targetPage)); // set current page to target page
+    setOffSet((targetPage - 1) * 5); // calculate offset
+  };
 
-    useEffect(() => {
-        if(localStorage.getItem('data') === null) {
-        localStorage.setItem('data', JSON.stringify(appData));
-        } else {
-        let localData = JSON.parse(localStorage.getItem('data'));
-        setData(localData);
-        }
-    }, []);
+  const handlePrevious = (Event) => {
+    Event.preventDefault();
+    let targetPage = Event.target.innerHTML;
+    setCurrentPage(parseInt(targetPage));
+    setOffSet((targetPage - 1) * 5);
+  };
+  useEffect(() => {
+    setPaginationData(searchResults.slice(offSet, offSet + 5));
+  }, [searchResults, currentPage, searchTerm, offSet, orderType]);
 
-    const addToData = (data) => {
-        let localData = JSON.parse(localStorage.getItem('data'));
-        localData.push(data);
-        localStorage.setItem('data', JSON.stringify(localData));
-        setData(localData);
-
+  useEffect(() => {
+    if (localStorage.getItem("data") === null) {
+      localStorage.setItem("data", JSON.stringify(appData));
+    } else {
+      let localData = JSON.parse(localStorage.getItem("data"));
+      setData(localData);
     }
-    const orderDataByNameAsc = () => {
-        let localData = JSON.parse(localStorage.getItem('data'));
-        localData.sort((a, b) => {
-            if(a[0] < b[0]) { return -1; }
-            if(a[0] > b[0]) { return 1; }
-            return 0;
-        });
-        localStorage.setItem('data', JSON.stringify(localData));
-        setData(localData);
+  }, []);
+
+  const addToData = (data) => {
+    let localData = JSON.parse(localStorage.getItem("data"));
+    localData.push(data);
+    localStorage.setItem("data", JSON.stringify(localData));
+    setData(localData);
+  };
+  const orderDataByNameAsc = (item) => {
+    item.sort((a, b) => {
+      if (a[0] < b[0]) {
+        return -1;
+      }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      return 0;
+    });
+    let localData = JSON.parse(localStorage.getItem("data"));
+    localData.sort((a, b) => {
+      if (a[0] < b[0]) {
+        return -1;
+      }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      return 0;
+    });
+    localStorage.setItem("data", JSON.stringify(localData));
+
+    setSearchResults(item);
+  };
+  const orderDataByNameDesc = (item) => {
+    item.sort((a, b) => {
+      if (a[0] > b[0]) {
+        return -1;
+      }
+      if (a[0] < b[0]) {
+        return 1;
+      }
+      return 0;
+    });
+    let localData = JSON.parse(localStorage.getItem("data"));
+    localData.sort((a, b) => {
+      if (a[0] > b[0]) {
+        return -1;
+      }
+      if (a[0] < b[0]) {
+        return 1;
+      }
+      return 0;
+    });
+    localStorage.setItem("data", JSON.stringify(localData));
+
+    setSearchResults(item);
+  };
+  const orderDataByDateAsc = (item) => {
+    item.sort((a, b) => {
+      if (a[3].split("/")[2] < b[3].split("/")[2]) {
+        return -1;
+      }
+      if (a[3].split("/")[2] > b[3].split("/")[2]) {
+        return 1;
+      }
+      return 0;
+    });
+    let localData = JSON.parse(localStorage.getItem("data"));
+    localData.sort((a, b) => {
+      if (a[3].split("/")[2] < b[3].split("/")[2]) {
+        return -1;
+      }
+      if (a[3].split("/")[2] > b[3].split("/")[2]) {
+        return 1;
+      }
+      return 0;
+    });
+    localStorage.setItem("data", JSON.stringify(localData));
+    setSearchResults(item);
+  };
+  const orderDataByDateDesc = (item) => {
+    item.sort((a, b) => {
+      if (a[3].split("/")[2] > b[3].split("/")[2]) {
+        return -1;
+      }
+
+      if (a[3].split("/")[2] < b[3].split("/")[2]) {
+        return 1;
+      }
+      return 0;
+    });
+    let localData = JSON.parse(localStorage.getItem("data"));
+    localData.sort((a, b) => {
+      if (a[3].split("/")[2] > b[3].split("/")[2]) {
+        return -1;
+      }
+
+      if (a[3].split("/")[2] < b[3].split("/")[2]) {
+        return 1;
+      }
+      return 0;
+    });
+    localStorage.setItem("data", JSON.stringify(localData));
+
+    setSearchResults(item);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  useEffect(() => {
+    if (orderType == "Name Ascending") {
+      orderDataByNameAsc(searchResults);
     }
-    const orderDataByNameDesc = () => {
-        let localData = JSON.parse(localStorage.getItem('data'));
-        localData.sort((a, b) => {  
-            if(a[0] > b[0]) { return -1; }
-            if(a[0] < b[0]) { return 1; }
-            return 0;
-        });
-        localStorage.setItem('data', JSON.stringify(localData));
-        setData(localData);
+    if (orderType == "Name Descending") {
+      orderDataByNameDesc(searchResults);
     }
-    const orderDataByDateAsc = () => {
-        let localData = JSON.parse(localStorage.getItem('data'));
-        localData.sort((a, b) => {
-            if(a[3] < b[3]) { return -1; }
-            if(a[3] > b[3]) { return 1; }
-            return 0;
-        });
-
-        localStorage.setItem('data', JSON.stringify(localData));
-        setData(localData);
+    if (orderType == "Year Ascending") {
+      orderDataByDateAsc(searchResults);
     }
-    const orderDataByDateDesc = () => {
-        let localData = JSON.parse(localStorage.getItem('data'));
-        localData.sort((a, b) => {
-            if(a[3] > b[3]) { return -1; }
-
-            if(a[3] < b[3]) { return 1; }
-            return 0;
-        });
-        localStorage.setItem('data', JSON.stringify(localData));
-        setData(localData);
+    if (orderType == "Year Descending") {
+      orderDataByDateDesc(searchResults);
     }
-
-    const [searchTerm, setSearchTerm] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
-    const handleSearchChange = event => {
-        setSearchTerm(event.target.value);
-    };
-    useEffect(() => {
-        const results = data.filter(person =>
-            person[0].toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setSearchResults(results);
-    }, [searchTerm]);
-
-
-    const values = {
-        data,
-        setData,
-        addToData,
-        orderDataByNameAsc,
-        orderDataByNameDesc,
-        orderDataByDateAsc,
-        orderDataByDateDesc,
-        searchTerm,
-        setSearchTerm,
-        searchResults,
-        setSearchResults,
-        handleSearchChange
-    }
-
-    return (
-        <DataContext.Provider value={values}>
-            {children}
-        </DataContext.Provider>
+    console.log(orderType);
+  }, [orderType]);
+  useEffect(() => {
+    const results = data.filter((person) =>
+      searchTerm === ""
+        ? []
+        : person[0].toLowerCase().includes(searchTerm.toLowerCase())
     );
+    setItemQuantity(results.length);
+    setSearchResults(results);
+    console.log(searchTerm);
+  }, [searchTerm]);
+
+  const values = {
+    data,
+    setData,
+    addToData,
+    orderDataByNameAsc,
+    orderDataByNameDesc,
+    orderDataByDateAsc,
+    orderDataByDateDesc,
+    searchTerm,
+    setSearchTerm,
+    searchResults,
+    setSearchResults,
+    handleSearchChange,
+    handlePrevious,
+    handleNext,
+    handleNextIcon,
+    handlePreviousIcon,
+    currentPage,
+    offSet,
+    itemQuantity,
+    paginationData,
+    setOrderType,
+  };
+
+  return <DataContext.Provider value={values}>{children}</DataContext.Provider>;
 };
-
-
-
 
 const useData = () => useContext(DataContext);
 export { DataProvider, useData };

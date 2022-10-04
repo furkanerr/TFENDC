@@ -5,7 +5,9 @@ import "../../styles/index.scss";
 import Logo from "../../assets/icons/logo.svg";
 import ArrowLeft from "../../assets/icons/arrow-left.svg";
 import { Link } from "react-router-dom";
+import { useData } from "../../context/dataContext";
 const AddLinkPage = () => {
+  const {addToData} = useData();
   const [values, setValues] = useState({
     nameSurname: "",
     country: "",
@@ -72,6 +74,7 @@ const AddLinkPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    addToData(values);
   };
 
   const onChange = (e) => {

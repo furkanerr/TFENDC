@@ -1,0 +1,99 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ margin: 0 auto;
+    width: 18rem;
+    color: #7e7e7e;
+    transition: all .3s;
+    div{
+        width: 24px;
+height: 24px;
+background: #FFFFFF;
+border: 1px solid #484848;
+
+    }
+  }
+
+  .pagination div:hover {
+    cursor: pointer;
+  }
+  .pagination span:hover {
+    cursor:default;
+  }
+  .currentPage {
+    font-size: x-large;
+    background-color: #7e7e7e;
+    color: black;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+
+    background-color: #204080;
+    color: #fff;
+    
+  }
+  .prev {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    border: 1px solid #484848;
+    color: #484848;
+    padding: 5px;
+    background-color: #fff;
+    &:hover{
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+  }
+  .next {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    border: 1px solid #484848;
+    color: #484848;
+    padding: 5px;
+    background-color: #fff;
+    &:hover{
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+  }
+  .icon:hover{
+  
+    cursor: pointer;
+    
+  }
+
+    
+  @media only screen and (max-width: 400px) {
+    .pagination {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 20.75rem;
+      height: 0px;
+      color: #7e7e7e;
+      margin-right: 1.7rem;
+      margin-bottom: 4rem;
+  }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 550px) {
+   
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6.25rem;
+     margin: 0 auto;
+      width: 22.188rem;
+   
+      color: #7e7e7e;
+    }
+   
+  }

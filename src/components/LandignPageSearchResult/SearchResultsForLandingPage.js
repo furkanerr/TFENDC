@@ -12,7 +12,8 @@ function SearchResultsForLandingPage() {
                 searchResults !== [] &&
               searchResults.slice(0,3).map((item, index) => {
                 return (
-                  <div key={index}>
+                 <>
+                  <div key={index} className="box">
                       <div className="icon-locaiton">
                         <img src={IconLocation}/>
                       </div>
@@ -25,11 +26,13 @@ function SearchResultsForLandingPage() {
                             </div>
                         </div>
                   </div>
+                  <hr style={{width:"90%"}}></hr>
+                 </>
                 )
               })
             }
           </div>
-          <Link to="/result">
+          <Link to="/result" style={{textDecoration:'none',color:'inherit'}}>
           <div className="show-more">
             <b>Show more...</b>
           </div>
