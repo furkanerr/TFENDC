@@ -6,6 +6,7 @@ import IconLocation from "../../assets/icons/location-icon.svg";
 import { useData } from "../../context/dataContext";
 import Pagination from "../../components/pagination/Pagination";
 import { Link } from "react-router-dom";
+import OrderIcon from "../../assets/icons/order.svg";
 function ResultPage() {
   const { paginationData, searchTerm,setOrderType } = useData();
   return (
@@ -24,12 +25,14 @@ function ResultPage() {
         </div>
       </div>
       <div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
+  <button class="dropbtn">
+    <img src={OrderIcon}/>
+    Order By</button>
   <div class="dropdown-content">
     <div onClick={(e)=>{setOrderType(e.target.innerText)}}>Name Ascending</div>
     <div onClick={(e)=>setOrderType(e.target.innerText)}>Name Descending</div>
-    <div onClick={(e)=>setOrderType(e.target.innerText)}>Year Ascending</div>
-    <div onClick={(e)=>setOrderType(e.target.innerText)}>Year Descending</div>
+    <div onClick={(e)=>setOrderType(e.target.innerText)}>Date Ascending</div>
+    <div onClick={(e)=>setOrderType(e.target.innerText)}>Date Descending</div>
   </div>
 </div>
       <div className="page-body">

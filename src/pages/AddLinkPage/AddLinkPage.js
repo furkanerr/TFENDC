@@ -13,6 +13,8 @@ const AddLinkPage = () => {
     country: "",
     city: "",
     email: "",
+    date: "",
+    compony: "",
   });
   const [canSave, setCanSave] = useState(false);
   const regxName =
@@ -35,8 +37,40 @@ const AddLinkPage = () => {
       minlength: "4",
       maxlength: "60",
     },
+    
     {
       id: 2,
+      name: "compony",
+      type: "text",
+      placeholder: "Compony",
+      errorMessage: "only letters, min 2 – max 40 character",
+      label: "Compony",
+      required: true,
+      pattern:
+        "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
+      minlength: "2",
+      maxlength: "40",
+    },
+    {
+      id: 3,
+      name: "email",
+      type: "email",
+      placeholder: "Enter a e-mail (abc@xyz.com)",
+      errorMessage: "Please enter valid email address!",
+      label: "Email",
+      required: true,
+    },
+    {
+      id: 4,
+      name: "date",
+      type: "date",
+      placeholder: "Date",
+      errorMessage: "Please enter valid date",
+      label: "Date",
+      required: true,
+    },
+    {
+      id: 5,
       name: "country",
       type: "text",
       placeholder: "Country",
@@ -49,7 +83,7 @@ const AddLinkPage = () => {
       maxlength: "40",
     },
     {
-      id: 3,
+      id: 6,
       name: "city",
       type: "text",
       placeholder: "City",
@@ -61,22 +95,24 @@ const AddLinkPage = () => {
       minlength: "2",
       maxlength: "40",
     },
-    {
-      id: 4,
-      name: "email",
-      type: "email",
-      placeholder: "Enter a e-mail (abc@xyz.com)",
-      errorMessage: "Please enter valid email address!",
-      label: "Email",
-      required: true,
-    },
+    
+    
   ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToData(values);
+   addToData(
+    [
+     values.nameSurname,
+      values.compony,
+      values.email,
+      values.date.split("-").reverse().join("/"),
+      values.country,
+      values.city,
+  ]
+   )
   };
-
+ 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };

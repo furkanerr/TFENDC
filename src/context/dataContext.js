@@ -106,48 +106,52 @@ const DataProvider = ({ children }) => {
   };
   const orderDataByDateAsc = (item) => {
     item.sort((a, b) => {
-      if (a[3].split("/")[2] < b[3].split("/")[2]) {
-        return -1;
+      if (a[3].split("/")[2] !== b[3].split("/")[2]) {
+        return b[3].split("/")[2] - a[3].split("/")[2];
       }
-      if (a[3].split("/")[2] > b[3].split("/")[2]) {
-        return 1;
+      if(a[3].split("/")[1] !== b[3].split("/")[1]){
+        return b[3].split("/")[1]-a[3].split("/")[1];
       }
-      return 0;
+      return b[3].split("/")[0]-a[3].split("/")[0];
+      
     });
     let localData = JSON.parse(localStorage.getItem("data"));
     localData.sort((a, b) => {
-      if (a[3].split("/")[2] < b[3].split("/")[2]) {
-        return -1;
+      if (a[3].split("/")[2] !== b[3].split("/")[2]) {
+        return b[3].split("/")[2] - a[3].split("/")[2];
       }
-      if (a[3].split("/")[2] > b[3].split("/")[2]) {
-        return 1;
+      if(a[3].split("/")[1] !== b[3].split("/")[1]){
+        return b[3].split("/")[1]-a[3].split("/")[1];
       }
-      return 0;
+      return b[3].split("/")[0]-a[3].split("/")[0];
+  
     });
     localStorage.setItem("data", JSON.stringify(localData));
     setSearchResults(item);
   };
   const orderDataByDateDesc = (item) => {
     item.sort((a, b) => {
-      if (a[3].split("/")[2] > b[3].split("/")[2]) {
-        return -1;
+      if (b[3].split("/")[2] !== a[3].split("/")[2]) {
+        return a[3].split("/")[2] - b[3].split("/")[2];
       }
 
-      if (a[3].split("/")[2] < b[3].split("/")[2]) {
-        return 1;
+      if (a[3].split("/")[1] !== b[3].split("/")[1]) {
+        return a[3].split("/")[1] -b[3].split("/")[1];
       }
-      return 0;
+      return a[3].split("/")[0] - b[3].split("/")[0];
+     
     });
     let localData = JSON.parse(localStorage.getItem("data"));
     localData.sort((a, b) => {
-      if (a[3].split("/")[2] > b[3].split("/")[2]) {
-        return -1;
+      if (b[3].split("/")[2] !== a[3].split("/")[2]) {
+        return a[3].split("/")[2] - b[3].split("/")[2];
       }
 
-      if (a[3].split("/")[2] < b[3].split("/")[2]) {
-        return 1;
+      if (a[3].split("/")[1] !== b[3].split("/")[1]) {
+        return a[3].split("/")[1] -b[3].split("/")[1];
       }
-      return 0;
+      return a[3].split("/")[0] - b[3].split("/")[0];
+      
     });
     localStorage.setItem("data", JSON.stringify(localData));
 
@@ -164,17 +168,17 @@ const DataProvider = ({ children }) => {
     if (orderType == "Name Descending") {
       orderDataByNameDesc(searchResults);
     }
-    if (orderType == "Year Ascending") {
+    if (orderType == "Date Ascending") {
       orderDataByDateAsc(searchResults);
     }
-    if (orderType == "Year Descending") {
+    if (orderType == "Date Descending") {
       orderDataByDateDesc(searchResults);
     }
     console.log(orderType);
   }, [orderType]);
   useEffect(() => {
     const results = data.filter((person) =>
-      searchTerm === ""
+      searchTerm == ""
         ? []
         : person[0].toLowerCase().includes(searchTerm.toLowerCase())
     );
