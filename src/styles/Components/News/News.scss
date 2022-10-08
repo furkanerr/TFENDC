@@ -18,21 +18,18 @@
     overflow: hidden;
     display: flex;
     align-items: center;
+    .handle {
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  
     .Carousel-container {
       margin: 0 auto;
       overflow: hidden;
       display: flex;
-      .handle {
-        z-index: 10;
-        display: flex;
-        align-items: center;
-      }
-      .left-handle {
-        margin-right: 25px;
-      }
-      .right-handle {
-        margin-right: 25px;
-      }
+      
       .slider {
         display: flex;
         width: calc(100% - 3.5rem);
