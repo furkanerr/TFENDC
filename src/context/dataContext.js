@@ -16,29 +16,29 @@ const DataProvider = ({ children }) => {
     // handle next icon click
 
     setCurrentPage(currentPage + 1);
-    setOffSet(offSet + 5);
+    setOffSet(offSet + 3);
   };
   const handlePreviousIcon = () => {
     // handle previous icon click
     setCurrentPage(currentPage - 1);
-    setOffSet(offSet - 5);
+    setOffSet(offSet - 3);
   };
   const handleNext = (Event) => {
     // handle next click
     Event.preventDefault(); // prevent default behaviour
     let targetPage = Event.target.innerHTML; // get target page number
     setCurrentPage(parseInt(targetPage)); // set current page to target page
-    setOffSet((targetPage - 1) * 5); // calculate offset
+    setOffSet((targetPage - 1) * 3); // calculate offset
   };
 
   const handlePrevious = (Event) => {
     Event.preventDefault();
     let targetPage = Event.target.innerHTML;
     setCurrentPage(parseInt(targetPage));
-    setOffSet((targetPage - 1) * 5);
+    setOffSet((targetPage - 1) * 3);
   };
   useEffect(() => {
-    setPaginationData(searchResults.slice(offSet, offSet + 5));
+    setPaginationData(searchResults.slice(offSet, offSet + 3));
   }, [searchResults, currentPage, searchTerm, offSet, orderType]);
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import Logo from "../../assets/icons/logo.svg";
 import ArrowLeft from "../../assets/icons/arrow-left.svg";
 import { Link } from "react-router-dom";
 import { useData } from "../../context/dataContext";
+import Toast from "../../components/Toast/Toast";
 const AddLinkPage = () => {
   const {addToData} = useData();
   const [values, setValues] = useState({
@@ -16,7 +17,9 @@ const AddLinkPage = () => {
     date: "",
     compony: "",
   });
-  const [canSave, setCanSave] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const  [isSubmitted, setIsSubmitted] = useState(false);
   const regxName =
     /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{4,60}$/;
   const regxEmail =
@@ -98,39 +101,76 @@ const AddLinkPage = () => {
     
     
   ];
-
+// inputs dizisi ile inputları mapleyerek AddLinkInput komponenti oluşturmak daha kolay olurdu. Ama toastify için şuanki çözüm daha kolay.
   const handleSubmit = (e) => {
     e.preventDefault();
-   addToData(
-    [
-     values.nameSurname,
-      values.compony,
-      values.email,
-      values.date.split("-").reverse().join("/"),
-      values.country,
-      values.city,
-  ]
-   )
+    setErrors(validate(values));
+    setIsSubmitted(true);
   };
  
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   useEffect(() => {
-    if (
-      regxName.test(values.nameSurname) == false ||
-      regxOther.test(values.country) == false ||
-      regxOther.test(values.city) == false ||
-      regxEmail.test(values.email) == false
-    ) {
-      setCanSave(false);
-    } else {
-      setCanSave(true);
+    console.log(errors);
+    if (Object.keys(errors).length === 0 && isSubmitted) {
+      addToData(
+        [
+         values.nameSurname,
+          values.compony,
+          values.email,
+          values.date.split("-").reverse().join("/"),
+          values.country,
+          values.city,
+      ]
+       )
     }
-  }, [values]);
+  }, [errors]);
+  const validate = (values) =>{
+      const errors = {}
+      if(!values.nameSurname){
+          errors.nameSurname = "Name is required"
+      }else if(!regxName.test(values.nameSurname)){
+          errors.nameSurname = "Name is invalid"
+      }
+      if(!values.compony){
+          errors.compony = "Compony is required"
+      } else if(!regxOther.test(values.compony)){
+          errors.compony = "Compony is invalid"
+      } 
+      if(!values.email){
+          errors.email = "Email is required"
+      } else if(!regxEmail.test(values.email)){
+          errors.email = "Email is invalid"
+      }
+      if(!values.date){
+          errors.date = "Date is required"
+      }   
 
+      if(!values.country){
+          errors.country = "Country is required"
+      } else if(!regxOther.test(values.country)){
+          errors.country = "Country is invalid"
+      }
+
+      if(!values.city){ 
+          errors.city = "City is required"
+      } else if(!regxOther.test(values.city)){
+          errors.city = "City is invalid"
+      }
+      return errors
+  }
   return (
     <div className="add-link-page">
+      <div className="Toast-container">
+        {
+          Object.keys(errors).length === 0 && isSubmitted && <Toast message="Link added successfully" type='success' setIsSubmitted={setIsSubmitted} />
+         
+        }
+        {
+          Object.keys(errors).length !== 0 && isSubmitted && Object.values(errors).map((error, index) => <Toast key={index} message={error} type='error' setIsSubmitted={setIsSubmitted}/>)
+        }
+      </div>
       <div className="header">
         <Link to="/">
           <div>
@@ -145,16 +185,75 @@ const AddLinkPage = () => {
       </div>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
-          {inputs.map((input) => (
+          {/* {inputs.map((input) => (
             <AddLinkInput
               key={input.id}
               {...input}
               value={values[input.name]}
               onChange={onChange}
             />
-          ))}
-
-          <Buttons type={"add"} isDisabled={!canSave}>
+          ))} */}
+          <label htmlFor="nameSurname">Name Surname</label>
+          <input
+            type="text"
+            name="nameSurname"
+            id="nameSurname"
+            placeholder="Name Surname"
+            value={values.nameSurname}
+            onChange={onChange}
+          />
+          {errors.nameSurname && <p className="error">{errors.nameSurname}</p>}
+          <label htmlFor="compony">Compony</label>
+          <input
+            type="text"
+            name="compony"
+            id="compony"
+            placeholder="Compony"
+            value={values.compony}
+            onChange={onChange}
+          />
+          {errors.compony && <p className="error">{errors.compony}</p>}
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter a e-mail"
+            value={values.email}
+            onChange={onChange}
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            name="date"
+            id="date"
+            placeholder="Date"
+            value={values.date}
+            onChange={onChange}
+          />
+          {errors.date && <p className="error">{errors.date}</p>}
+          <label htmlFor="country">Country</label>
+          <input
+            type="text"
+            name="country"
+            id="country"
+            placeholder="Country"
+            value={values.country}
+            onChange={onChange}
+          />
+          {errors.country && <p className="error">{errors.country}</p>}
+          <label htmlFor="city">City</label>
+          <input
+            type="text"
+            name="city"
+            id="city" 
+            placeholder="City"
+            value={values.city}
+            onChange={onChange}
+          />
+          {errors.city && <p className="error">{errors.city}</p>}
+          <Buttons type={"add"}>
             Add
           </Buttons>
         </form>

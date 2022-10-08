@@ -1,6 +1,7 @@
 import { useState } from "react";
-
+ 
 import "../../styles/index.scss"
+import Toast from "../Toast/Toast";
 const AddLinkInput = (props) => {
   const [focused, setFocused] = useState(false);
   const { label, errorMessage, onChange, id, value,...inputProps } = props;
@@ -16,10 +17,12 @@ const AddLinkInput = (props) => {
         {...inputProps}
         onChange={onChange}
         onBlur={handleFocus}
-        
         focused={focused.toString()}
       />
       <span className="error-message">{errorMessage}</span>
+      <span className="toast-container">
+      </span>
+      
     </div>
   );
 };

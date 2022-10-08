@@ -13,7 +13,7 @@ const Pagination = () => {
     searchResults,
   } = useData();
   return (
-    searchResults.length > 0 && (
+    searchResults.length > 0 &&  (
     <div className="pagination">
       {" "}
       {currentPage !== 1 && (

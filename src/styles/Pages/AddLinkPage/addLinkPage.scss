@@ -7,12 +7,51 @@
     gap: 2rem;
     padding: 3rem;
     }
+    .Toast-container{
+        position: fixed;
+        bottom: 0px;
+        right: 85px;
+    }
   .form-container {
     display: flex;
     justify-content: center;
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      text-align: left;
+      p{
+        color:  $color-input-error-border;
+      }
+        input {
+          background: #ffffff;
+          border: 1.5px solid $color-input-default-border;
+          border-radius: 12px;
+          width: 100%;
+          height: 46px;
+  
+          &::placeholder {
+            padding-left: 1rem;
+            color: $color-input-default-placeholder;
+            font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+          }
+        }
+        label{
+            font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: $color-input-default-label;
+  margin-top: 5px;
+  margin-bottom: 1rem;
+        }
+      }
+    }
    
   }
-}
+
 
 
 

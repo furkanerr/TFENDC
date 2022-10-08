@@ -1,0 +1,63 @@
+.toast {
+  padding: 1rem;
+  background-color: lightblue;
+  margin: 1rem;
+  width: 300px;
+  background: #C4C4C4;
+  border-radius: 8px;
+  .close-button {
+   float: right;
+    cursor: pointer;
+  }
+  .toast__content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .title {
+      margin-bottom: 15px;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 36px;
+      /* identical to box height, or 257% */
+
+      /* Ink/Darkest */
+
+      color: #090a0a;
+    }
+    .message {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 24px;
+      /* or 185% */
+
+      /* Ink/Darkest */
+
+      color: #090a0a;
+    }
+    .icon {
+      width: 70px;
+      height: 32px;
+      right: 24px;
+      border-radius: 48px;
+      &__success {
+        background-color: #00b87c;
+        width: 60px;
+        border-radius: 20px;
+        color: #ffffff;
+        height: 25px;
+      }
+      &__error {
+        background: #ff4e78;
+        width: 60px;
+        border-radius: 20px;
+        color: #ffffff;
+        height: 22px;
+        
+      }
+    }
+  }
+}

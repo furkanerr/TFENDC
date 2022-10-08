@@ -1,29 +1,67 @@
-.Carousel{
-    width: 57%;
+.Carousel {
+  text-align: left;
+  width: 61%;
+  margin: 0 auto;
+  .header {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 36px;
+    margin-left: 55px;
+
+    color: #090a0a;
+  }
+  .wrapper {
+    width: 100%;
     margin: 0 auto;
     overflow: hidden;
-    .Carousel-container{
-        
-        margin: 0 auto;
-        overflow: hidden;
+    display: flex;
+    align-items: center;
+    .Carousel-container {
+      margin: 0 auto;
+      overflow: hidden;
+      display: flex;
+      .handle {
+        z-index: 10;
         display: flex;
-        .handle{
-            padding: 1rem;
-            background-color: aqua;
-            z-index: 10;
-        }
-    .slider{
+        align-items: center;
+      }
+      .left-handle {
+        margin-right: 25px;
+      }
+      .right-handle {
+        margin-right: 25px;
+      }
+      .slider {
         display: flex;
-        width: calc(100% - 4rem);
+        width: calc(100% - 3.5rem);
         transition: transform 0.5s ease-in-out;
-        .slider-item{
-            padding: 1rem;
-            text-align: left;
-            .slider-item-text{
-                padding: 1rem;
-            }
-        }
+        .slider-item {
+          padding: 1rem;
         
+
+          .slider-item-text {
+            padding: 1rem;
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            color: #090a0a;
+            
+          }
+          .time-and-owner {
+            padding-left: 1rem;
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            color: #6c7072;
+          }
+        }
+      }
     }
-}
+  }
 }

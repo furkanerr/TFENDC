@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../../styles/index.scss";
+import IconRight from '../../assets/icons/icon-right.svg';
+import IconLeft from '../../assets/icons/icon-left.svg';
 function News() {
   const newsData =[
     {
@@ -43,25 +45,63 @@ function News() {
         'img':'https://i.ibb.co/HNWZX8g/Image.png',
         'time':'1h Ago',
         'owner':'John Doe',
-    }
+    },
+    {
+      "id": 7,
+      "title": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      'img':'https://i.ibb.co/HNWZX8g/Image.png',
+      'time':'1h Ago',
+      'owner':'John Doe',
+  },
+  {
+      "id": 8,
+      "title": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      'img':'https://i.ibb.co/HNWZX8g/Image.png',
+      'time':'1h Ago',
+      'owner':'John Doe',
+  },
+  {
+      "id": 9,
+      "title": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      'img':'https://i.ibb.co/HNWZX8g/Image.png',
+      'time':'1h Ago',
+      'owner':'John Doe',
+  }
 ]
-const [deger,setDeger] = React.useState(0)
+
+const [sliderIndex, setSliderIndex] = useState(0);
+const [itemPerSlide] = useState(3);
+const [deger,setDeger] = useState(0)
     const handleNext =()=>{
-        setDeger(deger+100)
-        console.log(deger)
+       
+        if(sliderIndex < Math.ceil(newsData.length / itemPerSlide)){
+          setDeger(deger-100)
+            setSliderIndex(sliderIndex + 1)
+            console.log(sliderIndex)
+        }
+       
 
     }
     const handlePrev =()=>{
-      setDeger(deger-100)
+        if(sliderIndex > 0){
+          setDeger(deger+100)
+            setSliderIndex(sliderIndex - 1)
+            console.log(sliderIndex)
+        }
+      
 
   }
   return (
 <div className='Carousel'>
-    <div>
+    <div className='header'>
       Top News
     </div>
+    <div className='wrapper'>
+    <div className='handle left-handle' onClick={handlePrev}>
+      <img src={IconLeft} alt='arrow-left'/>
+    </div>
     <div className='Carousel-container'>
-    <div className='handle left-handle' onClick={handlePrev}></div>
+    
     <div className='slider' style={{transform:`translateX(${deger}%)`}}>
     {
       newsData.map((item,index)=>{
@@ -76,7 +116,7 @@ const [deger,setDeger] = React.useState(0)
               </div>
                 <div className='time-and-owner'>
                   <span className='time'>{item.time}</span>
-                  <span className='dot'>.</span>
+                  <span className='dot'>·</span>
                   <span className='owner'>{item.owner}</span>
                 </div>
           </div>
@@ -85,7 +125,11 @@ const [deger,setDeger] = React.useState(0)
       })
     }
     </div>
-    <div className=' handle right-handle' onClick={handleNext}></div>
+   
+    </div>
+    <div className='handle right-handle' onClick={handleNext}>
+    <img src={IconRight} alt='arrow-left'/>
+    </div>
     </div>
 </div>
 
