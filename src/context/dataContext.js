@@ -54,7 +54,7 @@ const DataProvider = ({ children }) => {
     
     let localData = JSON.parse(localStorage.getItem("data"));
      
-    localData.push(data);
+    localData.data.push(data);
     localStorage.setItem("data", JSON.stringify(localData));
     setData(localData);
   };
@@ -69,7 +69,7 @@ const DataProvider = ({ children }) => {
       return 0;
     });
     let localData = JSON.parse(localStorage.getItem("data"));
-    localData.sort((a, b) => {
+    localData.data.sort((a, b) => {
       if (a[0] < b[0]) {
         return -1;
       }
@@ -93,7 +93,7 @@ const DataProvider = ({ children }) => {
       return 0;
     });
     let localData = JSON.parse(localStorage.getItem("data"));
-    localData.sort((a, b) => {
+    localData.data.sort((a, b) => {
       if (a[0] > b[0]) {
         return -1;
       }
@@ -118,7 +118,7 @@ const DataProvider = ({ children }) => {
       
     });
     let localData = JSON.parse(localStorage.getItem("data"));
-    localData.sort((a, b) => {
+    localData.data.sort((a, b) => {
       if (a[3].split("/")[2] !== b[3].split("/")[2]) {
         return b[3].split("/")[2] - a[3].split("/")[2];
       }
@@ -144,7 +144,7 @@ const DataProvider = ({ children }) => {
      
     });
     let localData = JSON.parse(localStorage.getItem("data"));
-    localData.sort((a, b) => {
+    localData.data.sort((a, b) => {
       if (b[3].split("/")[2] !== a[3].split("/")[2]) {
         return a[3].split("/")[2] - b[3].split("/")[2];
       }
