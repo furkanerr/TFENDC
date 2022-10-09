@@ -54,7 +54,7 @@ const DataProvider = ({ children }) => {
     
     let localData = JSON.parse(localStorage.getItem("data"));
      
-    localData = [...localData, data];
+    localData.push(data);
     localStorage.setItem("data", JSON.stringify(localData));
     setData(localData);
   };
