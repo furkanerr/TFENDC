@@ -11,7 +11,7 @@ import { useData } from "../../context/dataContext";
 
 import SearchResultsForLandingPage from "../../components/LandignPageSearchResult/SearchResultsForLandingPage";
 function LandingPage() {
-  const {searchResults,searchTerm} = useData();
+  const {searchResults,searchTerm,paginationData} = useData();
 
   return (
     <div className="landing-page-container">
@@ -24,7 +24,7 @@ function LandingPage() {
             <SearchBar/>
         </section>
        {
-        searchResults && searchTerm &&(
+        searchResults.length>0 && searchTerm  &&(
           <SearchResultsForLandingPage searchResults={searchResults}/>
         )
        }

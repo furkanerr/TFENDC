@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { useData } from '../../context/dataContext';
 import IconLocation from "../../assets/icons/location-icon.svg";
 function SearchResultsForLandingPage() {
-    const {searchResults} = useData();
+    const {searchResults,searchTerm} = useData();
 
   return (
+    
     <section className="result-section">  
           <div className="result-item">
             {
@@ -38,7 +39,8 @@ function SearchResultsForLandingPage() {
           </div>
             </Link>
         </section>
-  )
+        )
+  
 }
 
 export default SearchResultsForLandingPage
