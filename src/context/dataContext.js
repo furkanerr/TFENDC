@@ -179,7 +179,7 @@ const DataProvider = ({ children }) => {
     console.log(orderType);
   }, [orderType]);
   useEffect(() => {
-    const results = data.filter((person) =>
+    const results = data.data.filter((person) =>
       searchTerm == ""
         ? []
         : person[0].toLowerCase().includes(searchTerm.toLowerCase())
