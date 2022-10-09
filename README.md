@@ -1,6 +1,8 @@
 
 Live: https://tesodev-furkanerr.vercel.app/
-
+--------
+!Localde projeyi çalıştırabilmek için context içindeki localStorageden gelen verilerin atıldığı değişkenlerden .data ifadesini kaldırın. 
+-----------
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
