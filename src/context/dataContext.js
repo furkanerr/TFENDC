@@ -53,7 +53,7 @@ const DataProvider = ({ children }) => {
   const addToData = (data) => {
     
     let localData = JSON.parse(localStorage.getItem("data"));
-     
+      //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı. localde çalışması için localData.data şeklinde kullanılabilir.
     localData.data.push(data);
     localStorage.setItem("data", JSON.stringify(localData));
     setData(localData);
@@ -69,6 +69,7 @@ const DataProvider = ({ children }) => {
       return 0;
     });
     let localData = JSON.parse(localStorage.getItem("data"));
+          //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı. 
     localData.data.sort((a, b) => {
       if (a[0] < b[0]) {
         return -1;
@@ -93,6 +94,7 @@ const DataProvider = ({ children }) => {
       return 0;
     });
     let localData = JSON.parse(localStorage.getItem("data"));
+          //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı. 
     localData.data.sort((a, b) => {
       if (a[0] > b[0]) {
         return -1;
@@ -118,6 +120,7 @@ const DataProvider = ({ children }) => {
       
     });
     let localData = JSON.parse(localStorage.getItem("data"));
+          //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı. 
     localData.data.sort((a, b) => {
       if (a[3].split("/")[2] !== b[3].split("/")[2]) {
         return b[3].split("/")[2] - a[3].split("/")[2];
@@ -144,6 +147,7 @@ const DataProvider = ({ children }) => {
      
     });
     let localData = JSON.parse(localStorage.getItem("data"));
+          //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı.
     localData.data.sort((a, b) => {
       if (b[3].split("/")[2] !== a[3].split("/")[2]) {
         return a[3].split("/")[2] - b[3].split("/")[2];
@@ -180,6 +184,7 @@ const DataProvider = ({ children }) => {
   }, [orderType]);
   useEffect(() => {
     if(searchTerm.length>0){
+      //localde data içinde data arrayi yok ama vercelde bu şekilde çalışıyor....!!!!
     const results = data.data.filter((person) =>
       searchTerm == ""
         ? []

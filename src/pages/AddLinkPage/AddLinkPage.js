@@ -132,12 +132,12 @@ const AddLinkPage = () => {
       if(!values.nameSurname){
           errors.nameSurname = "Name is required"
       }else if(!regxName.test(values.nameSurname)){
-          errors.nameSurname = "Name is invalid"
+          errors.nameSurname = "only letters, min 4 – max 60 character"
       }
       if(!values.compony){
           errors.compony = "Compony is required"
       } else if(!regxOther.test(values.compony)){
-          errors.compony = "Compony is invalid"
+          errors.compony = "only letters, min 4 – max 60 character"
       } 
       if(!values.email){
           errors.email = "Email is required"
@@ -151,13 +151,13 @@ const AddLinkPage = () => {
       if(!values.country){
           errors.country = "Country is required"
       } else if(!regxOther.test(values.country)){
-          errors.country = "Country is invalid"
+          errors.country = "only letters, min 2 – max 40 character"
       }
 
       if(!values.city){ 
           errors.city = "City is required"
       } else if(!regxOther.test(values.city)){
-          errors.city = "City is invalid"
+          errors.city = "only letters, min 2 – max 40 character"
       }
       return errors
   }
