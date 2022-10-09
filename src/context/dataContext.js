@@ -51,7 +51,8 @@ const DataProvider = ({ children }) => {
   }, []);
 
   const addToData = (data) => {
-    let localData = JSON.parse(localStorage.getItem("data"));
+    let localData =[]
+     localData = JSON.parse(localStorage.getItem("data"));
     localData.push(data);
     localStorage.setItem("data", JSON.stringify(localData));
     setData(localData);
