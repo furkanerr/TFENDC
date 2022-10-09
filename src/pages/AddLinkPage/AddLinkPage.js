@@ -101,7 +101,8 @@ const AddLinkPage = () => {
     
     
   ];
-// inputs dizisi ile inputları mapleyerek AddLinkInput komponenti oluşturmak daha kolay olurdu. Ama toastify için şuanki çözüm daha kolay.
+// inputs dizisi ile inputları mapleyerek AddLinkInput komponenti oluşturmak daha kolay olurdu. Ama toastify için şuanki çözüm daha kolay. Ayrıca bu şekilde 
+// patternsler dışa açık olduğu için pek güvenli değil. validasyonları js ile yapmak daha mantıklı.
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(validate(values));
