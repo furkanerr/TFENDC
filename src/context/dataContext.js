@@ -179,6 +179,7 @@ const DataProvider = ({ children }) => {
     console.log(orderType);
   }, [orderType]);
   useEffect(() => {
+    if(searchTerm.length>0){
     const results = data.data.filter((person) =>
       searchTerm == ""
         ? []
@@ -187,6 +188,7 @@ const DataProvider = ({ children }) => {
     setItemQuantity(results.length);
     setSearchResults(results);
     console.log(searchTerm);
+    }
   }, [searchTerm]);
 
   const values = {
