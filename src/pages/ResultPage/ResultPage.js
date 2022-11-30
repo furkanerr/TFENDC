@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../assets/icons/logo.svg";
 import Buttons from "../../components/Buttons/Buttons";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -7,10 +7,27 @@ import { useData } from "../../context/dataContext";
 import Pagination from "../../components/pagination/Pagination";
 import { Link } from "react-router-dom";
 import OrderIcon from "../../assets/icons/order.svg";
+import axios from "axios";
 function ResultPage() {
   const { paginationData, searchTerm,setOrderType } = useData();
+  const [fetchedData, setFetchedData] = useState([]);
+  const fetchData = async (data) => {
+    try {
+        const result  =await  axios.get(`https://api.agify.io/?name=${data}`);
+        console.log(result);
+        setFetchedData(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchData(searchTerm)
+    console.log(fetchedData.age);
+  }, [searchTerm])
+  
   return (
     <div className="container">
+      <div>{fetchedData.age}</div>
       <div className="header">
         <Link to="/">
           <div className="logo">

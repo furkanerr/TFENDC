@@ -35,11 +35,17 @@ const DataProvider = ({ children }) => {
     Event.preventDefault();
     let targetPage = Event.target.innerHTML;
     setCurrentPage(parseInt(targetPage));
-    setOffSet((targetPage - 1) * 3);
+    setOffSet((targetPage - 1) * 3); 
   };
   useEffect(() => {
     setPaginationData(searchResults.slice(offSet, offSet + 3));
+    console.log(offSet)
   }, [searchResults, currentPage, searchTerm, offSet, orderType]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    setOffSet(0);
+  }, [searchTerm]);
 
   useEffect(() => {
     if (localStorage.getItem("data") === null) {
@@ -52,9 +58,9 @@ const DataProvider = ({ children }) => {
 
   const addToData = (data) => {
     
-    let localData = JSON.parse(localStorage.getItem("data"));
+    const localData = JSON.parse(localStorage.getItem("data"));
       //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı. localde çalışması için localData.data şeklinde kullanılabilir.
-    localData.data.push(data);
+    localData.push(data);
     localStorage.setItem("data", JSON.stringify(localData));
     setData(localData);
   };
@@ -70,7 +76,7 @@ const DataProvider = ({ children }) => {
     });
     let localData = JSON.parse(localStorage.getItem("data"));
           //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı. 
-    localData.data.sort((a, b) => {
+    localData.sort((a, b) => {
       if (a[0] < b[0]) {
         return -1;
       }
@@ -95,7 +101,7 @@ const DataProvider = ({ children }) => {
     });
     let localData = JSON.parse(localStorage.getItem("data"));
           //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı. 
-    localData.data.sort((a, b) => {
+    localData.sort((a, b) => {
       if (a[0] > b[0]) {
         return -1;
       }
@@ -121,7 +127,7 @@ const DataProvider = ({ children }) => {
     });
     let localData = JSON.parse(localStorage.getItem("data"));
           //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı. 
-    localData.data.sort((a, b) => {
+    localData.sort((a, b) => {
       if (a[3].split("/")[2] !== b[3].split("/")[2]) {
         return b[3].split("/")[2] - a[3].split("/")[2];
       }
@@ -148,7 +154,7 @@ const DataProvider = ({ children }) => {
     });
     let localData = JSON.parse(localStorage.getItem("data"));
           //Vercelde gelen data içinde data arrayi olduğu için bu şekilde kulanıldı.
-    localData.data.sort((a, b) => {
+    localData.sort((a, b) => {
       if (b[3].split("/")[2] !== a[3].split("/")[2]) {
         return a[3].split("/")[2] - b[3].split("/")[2];
       }
@@ -185,7 +191,7 @@ const DataProvider = ({ children }) => {
   useEffect(() => {
     if(searchTerm.length>0){
       //localde data içinde data arrayi yok ama vercelde bu şekilde çalışıyor....!!!!
-    const results = data.data.filter((person) =>
+    const results = data.filter((person) =>
       searchTerm == ""
         ? []
         : person[0].toLowerCase().includes(searchTerm.toLowerCase())
